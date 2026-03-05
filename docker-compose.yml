@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: courseplataform_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: courseplataform_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - courseplataform_db_data:/var/lib/postgresql/data
+
+volumes:
+  courseplataform_db_data:
