@@ -1,0 +1,158 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001
+      author: daniel
+      changes:
+        - createTable:
+            tableName: tb_courses
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: title
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: thumbnail_url
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: level
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_at
+                  type: timestamp
+
+        - createTable:
+            tableName: tb_modules
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: course_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: order_index
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: tb_lessons
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+              - column:
+                  name: module_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: youtube_url
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duration_seconds
+                  type: integer
+              - column:
+                  name: thumbnail_url
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order_index
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_modules
+            baseColumnNames: course_id
+            referencedTableName: tb_courses
+            referencedColumnNames: id
+            constraintName: fk_course
+        - addForeignKeyConstraint:
+            baseTableName: tb_lessons
+            baseColumnNames: module_id
+            referencedTableName: tb_modules
+            referencedColumnNames: id
+            constraintName: fk_module
+
+        - createIndex:
+            tableName: tb_modules
+            indexName: idx_modules_course_order
+            columns:
+              - column:
+                  name: course_id
+              - column:
+                  name: order_index
+        - createIndex:
+            tableName: tb_lessons
+            indexName: idx_lessons_module
+            columns:
+              - column:
+                  name: module_id
+        - createIndex:
+            tableName: tb_lessons
+            indexName: idx_lessons_module_order
+            columns:
+              - column:
+                  name: module_id
+              - column:
+                  name: order_index
