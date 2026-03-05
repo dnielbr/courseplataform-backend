@@ -33,6 +33,7 @@ public class Course {
     private String thumbnailUrl;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private ELevel level;
 
     @Column(nullable = false, name = "created_at", updatable = false)

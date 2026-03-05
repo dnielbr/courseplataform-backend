@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002
+      author: daniel
+      changes:
+        - insert:
+            tableName: tb_courses
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 1
+              - column:
+                  name: title
+                  value: "Java para Iniciantes"
+              - column:
+                  name: description
+                  value: "Curso completo para iniciantes em Java"
+              - column:
+                  name: thumbnail_url
+                  value: "https://img.youtube.com/vi/sTX0UEplF54/maxresdefault.jpg"
+              - column:
+                  name: level
+                  value: "BEGINNER"
+        - insert:
+            tableName: tb_modules
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 1
+              - column:
+                  name: course_id
+                  valueNumeric: 1
+              - column:
+                  name: title
+                  value: "Introdução ao Java"
+              - column:
+                  name: description
+                  value: "Conceitos iniciais da linguagem Java."
+              - column:
+                  name: order_index
+                  valueNumeric: 1
+        - insert:
+            tableName: tb_lessons
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: module_id, valueNumeric: 1 }
+              - column: { name: title, value: "Curso de Java #01 - História do Java" }
+              - column: { name: description, value: "História e características do Java." }
+              - column: { name: youtube_url, value: "https://www.youtube.com/watch?v=sTX0UEplF54" }
+              - column: { name: duration_seconds, valueNumeric: 2160 }
+              - column: { name: thumbnail_url, value: "https://img.youtube.com/vi/sTX0UEplF54/maxresdefault.jpg" }
+              - column: { name: order_index, valueNumeric: 1 }
