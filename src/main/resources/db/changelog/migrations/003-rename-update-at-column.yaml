@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003
+      author: daniel
+      changes:
+        - renameColumn:
+            tableName: tb_courses
+            oldColumnName: update_at
+            newColumnName: updated_at
+            columnDataType: timestamp
