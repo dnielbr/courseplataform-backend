@@ -1,12 +1,20 @@
 package com.daniel.couseplataform_backend.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_lessons")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Lesson {
 
     @Id
@@ -14,7 +22,7 @@ public class Lesson {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "course_module_id")
+    @JoinColumn(name = "module_id")
     private CourseModule courseModule;
 
     @Column(nullable = false)

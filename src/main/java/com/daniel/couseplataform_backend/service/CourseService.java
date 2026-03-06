@@ -1,8 +1,12 @@
 package com.daniel.couseplataform_backend.service;
 
+import com.daniel.couseplataform_backend.dto.response.CourseResponseDto;
 import com.daniel.couseplataform_backend.dto.response.CourseSummaryDto;
-import java.util.List;
+import com.daniel.couseplataform_backend.dto.response.PageDto;
+import org.springframework.data.domain.Pageable;
+
 
 public interface CourseService {
-    List<CourseSummaryDto> findAll();
+    PageDto<CourseSummaryDto> findAll(Pageable pageable);
+    CourseResponseDto findById(Long id);
 }
