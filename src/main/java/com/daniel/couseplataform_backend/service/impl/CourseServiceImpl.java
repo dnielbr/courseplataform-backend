@@ -1,5 +1,6 @@
 package com.daniel.couseplataform_backend.service.impl;
 
+import com.daniel.couseplataform_backend.dto.request.CourseUpdateRequestDto;
 import com.daniel.couseplataform_backend.dto.response.CourseResponseDto;
 import com.daniel.couseplataform_backend.dto.response.CourseSummaryDto;
 import com.daniel.couseplataform_backend.dto.response.PageDto;
@@ -48,6 +49,27 @@ public class CourseServiceImpl implements CourseService {
     public CourseResponseDto  findById(Long id) {
         Course course = courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource Not Found"));
         return courseMapper.toCourseDto(course);
+    }
+
+    @Override
+    public CourseSummaryDto update(Long id, CourseUpdateRequestDto dto){
+        log.info("Update Course");
+        Course course = courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource Not Found"));
+
+        if(dto.title() != null && !dto.title().isBlank()){
+            course.setTitle(dto.title());
+        }
+        if(dto.description() != null && !dto.description().isBlank()){
+            course.setDescription(dto.description());
+        }
+        if(dto.thumbnailUrl() != null && !dto.thumbnailUrl().isBlank()){
+            course.setThumbnailUrl(dto.thumbnailUrl());
+        }
+        if(dto.level() != null){
+            course.setLevel(dto.level());
+        }
+
+        return courseMapper.toDto(courseRepository.save(course));
     }
 
 }
