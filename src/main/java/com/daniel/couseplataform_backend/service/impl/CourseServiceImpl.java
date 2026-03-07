@@ -1,5 +1,6 @@
 package com.daniel.couseplataform_backend.service.impl;
 
+import com.daniel.couseplataform_backend.dto.request.CourseCreateRequestDto;
 import com.daniel.couseplataform_backend.dto.request.CourseUpdateRequestDto;
 import com.daniel.couseplataform_backend.dto.response.CourseResponseDto;
 import com.daniel.couseplataform_backend.dto.response.CourseSummaryDto;
@@ -69,6 +70,12 @@ public class CourseServiceImpl implements CourseService {
             course.setLevel(dto.level());
         }
 
+        return courseMapper.toDto(courseRepository.save(course));
+    }
+
+    @Override
+    public CourseSummaryDto create(CourseCreateRequestDto dto){
+        Course course = courseMapper.toEntity(dto);
         return courseMapper.toDto(courseRepository.save(course));
     }
 

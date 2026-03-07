@@ -1,5 +1,6 @@
 package com.daniel.couseplataform_backend.service;
 
+import com.daniel.couseplataform_backend.dto.request.CourseCreateRequestDto;
 import com.daniel.couseplataform_backend.dto.request.CourseUpdateRequestDto;
 import com.daniel.couseplataform_backend.dto.response.CourseResponseDto;
 import com.daniel.couseplataform_backend.dto.response.CourseSummaryDto;
@@ -11,4 +12,5 @@ public interface CourseService {
     PageDto<CourseSummaryDto> findAll(Pageable pageable);
     CourseResponseDto findById(Long id);
     CourseSummaryDto update(Long id, CourseUpdateRequestDto dto);
+    CourseSummaryDto create(CourseCreateRequestDto dto);
 }
