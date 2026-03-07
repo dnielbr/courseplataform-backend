@@ -79,4 +79,10 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.toDto(courseRepository.save(course));
     }
 
+    @Override
+    public void delete(Long id){
+        courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource Not Found"));
+        courseRepository.deleteById(id);
+    }
+
 }

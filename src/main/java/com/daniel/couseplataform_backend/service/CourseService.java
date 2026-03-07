@@ -13,4 +13,5 @@ public interface CourseService {
     CourseResponseDto findById(Long id);
     CourseSummaryDto update(Long id, CourseUpdateRequestDto dto);
     CourseSummaryDto create(CourseCreateRequestDto dto);
+    void delete(Long id);
 }
