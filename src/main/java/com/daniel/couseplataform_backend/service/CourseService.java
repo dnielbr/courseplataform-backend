@@ -5,12 +5,14 @@ import com.daniel.couseplataform_backend.dto.request.CourseUpdateRequestDto;
 import com.daniel.couseplataform_backend.dto.response.CourseResponseDto;
 import com.daniel.couseplataform_backend.dto.response.CourseSummaryDto;
 import com.daniel.couseplataform_backend.dto.response.PageDto;
+import com.daniel.couseplataform_backend.model.Course;
 import org.springframework.data.domain.Pageable;
 
 
 public interface CourseService {
     PageDto<CourseSummaryDto> findAll(Pageable pageable);
     CourseResponseDto findById(Long id);
+    Course findEntityById(Long id);
     CourseSummaryDto update(Long id, CourseUpdateRequestDto dto);
     CourseSummaryDto create(CourseCreateRequestDto dto);
     void delete(Long id);

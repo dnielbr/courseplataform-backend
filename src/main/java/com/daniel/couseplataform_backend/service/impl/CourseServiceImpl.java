@@ -16,8 +16,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 
 @Service
 @Slf4j
@@ -35,14 +33,14 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public CourseResponseDto  findById(Long id) {
-        Course course = courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource Not Found"));
+        Course course = findEntityById(id);
         return courseMapper.toCourseDto(course);
     }
 
     @Override
     public CourseSummaryDto update(Long id, CourseUpdateRequestDto dto){
         log.info("Update Course");
-        Course course = courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource Not Found"));
+        Course course = findEntityById(id);
 
         if(dto.title() != null && !dto.title().isBlank()){
             course.setTitle(dto.title());
@@ -68,8 +66,13 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void delete(Long id){
-        courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource Not Found"));
-        courseRepository.deleteById(id);
+        Course course = findEntityById(id);
+        courseRepository.delete(course);
+    }
+
+    @Override
+    public Course findEntityById(Long id){
+        return courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Course not found with id: " + id));
     }
 
 }
